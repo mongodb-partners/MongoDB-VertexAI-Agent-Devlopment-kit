@@ -5,6 +5,7 @@
 1. [MongoDB Atlas Cluster](https://www.mongodb.com/docs/guides/atlas/cluster/) on [Google Cloud](https://www.mongodb.com/docs/atlas/reference/google-gcp/)
 2. [Google Cloud console](https://console.cloud.google.com/welcome/new) access.
 3. Vertex AI colab enterprise for Google cloud console.
+4. The tools for agents uses vertexAI extensions. refer MongoDB [github](https://github.com/mongodb-partners/MongoDB-VertexAI-extensions) to set up the extensions. 
 
 
 ### Setup
