@@ -9,9 +9,7 @@
 
 
 ### Setup
-1. Download most recent copy of Vertex Agents SDK
-2. Imports and Initialization
-3. Create App
-4. Create Extension for MongoDB Atlas to query multiple collections.
-5. Query on structured data.
+Follow the instructions in the Python notebooks
+ 1. extensions for MongoDB: To build MongoDB extension. Update the files as per instructions provided in the notebook
+ 2. Agent-SDK-use-case: To build and deploy app for Agent builder SDK
 
