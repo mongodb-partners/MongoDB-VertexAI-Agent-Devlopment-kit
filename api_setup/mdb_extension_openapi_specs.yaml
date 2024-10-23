@@ -4,9 +4,9 @@ info:
   title: MongoDB Data API Service
   description: Service to retrieve documents from MongoDB based on query parameters.
 servers:
-  - url: <Your Cloud Function URL here>
+  - url: <Google Cloud Function URL>
 paths:
-  /action/deleteOne:
+  /deleteOne:
     post:
       operationId: deleteone_mdb
       summary: Delete a Document in MongoDB
@@ -27,10 +27,10 @@ paths:
                   description: The database name.
                 collection:
                   type: string
-                  description: The collection name. 
+                  description: The collection name.
                 filter:
                   type: object
-                  description: A MongoDB query filter that matches documents.       
+                  description: A MongoDB query filter that matches documents.
       headers:
         api-key:
           description: API key for authentication.
@@ -70,7 +70,7 @@ paths:
                 error: "Internal Server Error. Please try again later."
       security:
           - api-key: []
-  /action/aggregate:
+  /aggregate:
     post:
       operationId: aggregate_mdb
       summary: Get a Document in MongoDB
@@ -91,10 +91,10 @@ paths:
                   description: The database name.
                 collection:
                   type: string
-                  description: The collection name. 
+                  description: The collection name.
                 pipeline:
                   type: array
-                  description: A MongoDB query filter that matches documents.       
+                  description: A MongoDB query filter that matches documents.
       headers:
         api-key:
           description: API key for authentication.
@@ -134,7 +134,7 @@ paths:
                 error: "Internal Server Error. Please try again later."
       security:
           - api-key: []
-  /action/updateOne:
+  /updateOne:
     post:
       operationId: uppdateone_mdb
       summary: Update a Document in MongoDB
@@ -155,7 +155,7 @@ paths:
                   description: The database name.
                 collection:
                   type: string
-                  description: The collection name. 
+                  description: The collection name.
                 filter:
                   type: object
                   description: A MongoDB query filter that matches documents.
@@ -168,7 +168,7 @@ paths:
                 upsert:
                   type: boolean
                   description: On true Insert the new document to collection else update the document .
-                         
+
       headers:
         api-key:
           description: API key for authentication.
@@ -208,7 +208,7 @@ paths:
                 error: "Internal Server Error. Please try again later."
       security:
           - api-key: []
-  /action/insertOne:
+  /insertOne:
     post:
       operationId: insertone_mdb
       summary: Insert a Document in MongoDB
@@ -229,10 +229,10 @@ paths:
                   description: The database name.
                 collection:
                   type: string
-                  description: The collection name. 
+                  description: The collection name.
                 document:
                   type: object
-                  description: A MongoDB query filter that matches documents.       
+                  description: A MongoDB query filter that matches documents.
       headers:
         api-key:
           description: API key for authentication.
@@ -272,7 +272,7 @@ paths:
                 error: "Internal Server Error. Please try again later."
       security:
           - api-key: []
-  /action/find:
+  /find:
     post:
       operationId: findmany_mdb
       summary: Find all Documents in MongoDB
@@ -293,13 +293,13 @@ paths:
                   description: The database name.
                 collection:
                   type: string
-                  description: The collection name. 
+                  description: The collection name.
                 filter:
                   type: object
                   description: A MongoDB query filter that matches documents.
                 limit:
                   type: integer
-                  description: A MongoDB query to limit number of documents.       
+                  description: A MongoDB query to limit number of documents.
       headers:
         api-key:
           description: API key for authentication.
@@ -339,7 +339,7 @@ paths:
                 error: "Internal Server Error. Please try again later."
       security:
           - api-key: []
-  /action/findOne:
+  /findOne:
     post:
       operationId: findone_mdb
       summary: Find a Document in MongoDB
