@@ -6,10 +6,9 @@ from bson import ObjectId
 import traceback
 from datetime import datetime
 
-ATLAS_CONNECTION_STRING = os.environ['ATLAS_CONNECTION_STRING']
 
 def connect_to_mongodb():
-    client = MongoClient(ATLAS_CONNECTION_STRING)
+    client = MongoClient("<MongoDB Connection String>")
     return client
 
 
@@ -55,7 +54,7 @@ def mongodb_crud(request):
     print(">>>>>>>>>>>>>>>>>>>>>>>>")
 
     try:
-        if op == "/action/findOne":
+        if op == "/findOne":
             filter_op = payload['filter'] if 'filter' in payload else {}
             projection = payload['projection'] if 'projection' in payload else {}
             result = {"document": client[db][coll].find_one(filter_op, projection)}
@@ -66,7 +65,7 @@ def mongodb_crud(request):
                 if isinstance(result['document']['_id'], ObjectId):
                     result['document']['_id'] = str(result['document']['_id'])
 
-        elif op == "/action/find":
+        elif op == "/find":
             agg_query = []
 
             if 'filter' in payload and payload['filter'] != {}:
@@ -89,38 +88,38 @@ def mongodb_crud(request):
                 if isinstance(obj['_id'], ObjectId):
                     obj['_id'] = str(obj['_id'])
 
-        elif op == "/action/insertOne":
+        elif op == "/insertOne":
             if "document" not in payload or payload['document'] == {}:
                 return error_response("Send a document to insert")
             insert_op = client[db][coll].insert_one(payload['document'])
             result = {"insertedId": str(insert_op.inserted_id)}
 
-        elif op == "/action/insertMany":
+        elif op == "/insertMany":
             if "documents" not in payload or payload['documents'] == {}:
                 return error_response("Send a document to insert")
             insert_op = client[db][coll].insert_many(payload['documents'])
             result = {"insertedIds": [str(_id) for _id in insert_op.inserted_ids]}
 
-        elif op in ["/action/updateOne", "/action/updateMany"]:
+        elif op in ["/updateOne", "/updateMany"]:
             payload['upsert'] = payload['upsert'] if 'upsert' in payload else False
             if "_id" in payload['filter']:
                 payload['filter']['_id'] = ObjectId(payload['filter']['_id'])
-            if op == "/action/updateOne":
+            if op == "/updateOne":
                 update_op = client[db][coll].update_one(payload['filter'], payload['update'], upsert=payload['upsert'])
             else:
                 update_op = client[db][coll].update_many(payload['filter'], payload['update'], upsert=payload['upsert'])
             result = {"matchedCount": update_op.matched_count, "modifiedCount": update_op.modified_count}
 
-        elif op in ["/action/deleteOne", "/action/deleteMany"]:
+        elif op in ["/deleteOne", "/deleteMany"]:
             payload['filter'] = payload['filter'] if 'filter' in payload else {}
             if "_id" in payload['filter']:
                 payload['filter']['_id'] = ObjectId(payload['filter']['_id'])
-            if op == "/action/deleteOne":
+            if op == "/deleteOne":
                 result = {"deletedCount": client[db][coll].delete_one(payload['filter']).deleted_count}
             else:
                 result = {"deletedCount": client[db][coll].delete_many(payload['filter']).deleted_count}
 
-        elif op == "/action/aggregate":
+        elif op == "/aggregate":
             if "pipeline" not in payload or payload['pipeline'] == []:
                 return error_response("Send a pipeline")
             docs = list(client[db][coll].aggregate(payload['pipeline']))
