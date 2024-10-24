@@ -48,10 +48,6 @@ def mongodb_crud(request):
     db, coll = payload['database'], payload['collection']
     request_args = request.args
     op = request.path
-    print(">>>>>>>>>>>>>>>>>>>>>>>>")
-    print(payload)
-    print(op)
-    print(">>>>>>>>>>>>>>>>>>>>>>>>")
 
     try:
         if op == "/findOne":
