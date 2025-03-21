@@ -23,7 +23,7 @@ def product_details_search(query: str) -> str:
     Returns:
       results from MongoDB as a document.
     """
-    client = pymongo.MongoClient("mongodb+srv://venkatesh:ashwin123@freetier.kxcgwh2.mongodb.net")
+    client = pymongo.MongoClient("MongoDB connection string")
     vector_embeddings = generate_embeddings(query)
     pipeline = [
         {
@@ -54,7 +54,7 @@ def get_intrests(user: str) -> str:
           results from MongoDB as a string.
     """
     from pymongo import MongoClient
-    client = MongoClient("mongodb+srv://venkatesh:ashwin123@freetier.kxcgwh2.mongodb.net")
+    client = MongoClient("mongodb connection string")
     db = client["amazon"]  # Replace with your database name
     collection = db["users"]  # Replace with your collection name
     document = collection.find_one({"first_name": user})  # No filter, returns the first document found
