@@ -31,8 +31,8 @@ def product_details_search(query: str) -> str:
                 'index': 'vector_index',
                 'path': 'embeddings',
                 'queryVector': vector_embeddings,
-                'numCandidates': 1,
-                'limit': 1
+                'numCandidates': 50,
+                'limit': 5
             }
         }]
     result = client["amazon"]["products-updated"].aggregate(pipeline)
