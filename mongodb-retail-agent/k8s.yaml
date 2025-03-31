@@ -32,15 +32,15 @@ spec:
                       - "pool-1"
       containers:
       - name: python-app
-        image: gcr.io/iamtests-315719/af_mongodb:v0.1
+        image: gcr.io/gcp-pov/af_mongodb:v0.3
         imagePullPolicy: Always
         env:
         - name: PROJECT
-          value: "iamtests-315719"
+          value: "gcp-pov"
         - name: GOOGLE_GENAI_USE_VERTEXAI
           value: "1"
         - name: GOOGLE_CLOUD_PROJECT
-          value: "iamtests-315719"
+          value: "gcp-pov"
         - name: GOOGLE_CLOUD_LOCATION
           value: "us-central1"
         ports:
